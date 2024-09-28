@@ -110,7 +110,7 @@
 
 
 
-  <section class="colored-section" id = "aboutus">
+  <section class="wp-section" id = "aboutus">
   <div class="container" id="container">
     <div class="row">
       <div class="col-lg-6">
@@ -123,12 +123,12 @@
         <h1 class="big-heading2" style="color:#e6c57e;">MAKK & EUNICE</h1>
         <div class="text-container">
         <div class="text-justify">
-        <p class="text-item" margin-left : 100px; style="font-family: 'Raleway', sans-serif;">It all started in a virtual dance room in Audition,</p>
-        <p class="text-item" margin-left : 100px; style="font-family: 'Raleway', sans-serif;">where two players, MAKK and EUNICE, would meet up</p> 
-        <p class="text-item" margin-left : 100px; style="font-family: 'Raleway', sans-serif;">regularly. At first, they were just dance partners, showing off  </p> 
-        <p class="text-item" margin-left : 100px; style="font-family: 'Raleway', sans-serif;">their moves, competing for high scores, and laughing at</p> 
-        <p class="text-item" margin-left : 100px; style="font-family: 'Raleway', sans-serif;">their silly mistakes. They spent hours playing together,  </p>  
-        <p class="text-item" margin-left : 100px; style="font-family: 'Raleway', sans-serif;">chatting in between rounds, and slowly, a friendship turns into lovers.</p> 
+        <p class="text-item" margin-left : 100px; style="font-family: 'Raleway', sans-serif;">What started as playful teasing in group chats quickly turned</p>
+        <p class="text-item" margin-left : 100px; style="font-family: 'Raleway', sans-serif;">into private conversations, and soon, a real connection blossomed.</p> 
+        <p class="text-item" margin-left : 100px; style="font-family: 'Raleway', sans-serif;">We love playing together—whether it’s dancing or gardening</p> 
+        <p class="text-item" margin-left : 100px; style="font-family: 'Raleway', sans-serif;">in Audition, or exploring other games. Beyond gaming, we</p> 
+        <p class="text-item" margin-left : 100px; style="font-family: 'Raleway', sans-serif;">enjoy watching movies, talking for hours, and video calls</p>  
+        <p class="text-item" margin-left : 100px; style="font-family: 'Raleway', sans-serif;">that keep us connected in real life.</p> 
         </div>
       </div>
     </div>
@@ -141,7 +141,7 @@
 
 <div id="myModal" class="modal" style="display:none;">
   <span class="close" onclick="closeModal()">&times;</span>
-  <img class="modal-content" id="modalImage" />
+  <img class="modal-content" id="modalImage"/>
 </div>
 
 
@@ -249,7 +249,7 @@
       </div>
       </div>
       <div class="album-item" onclick="openModal('Letter/14iris.jpg')">
-        <img id="changingImage2" src="https://garden.sssolfege.com/img/ring/iconring_14_00.png" alt="Memory 15">
+        <img id="changingImage2" src="https://garden.sssolfege.com/img/ring/iconring_14_01.png" alt="Memory 15">
         <div class="caption" style="color:#3B8EDB">
           <img class="caption-image" src="https://garden.sssolfege.com/img/ring/textring_14.png" alt="LAVENDER" />
       </div>
@@ -273,7 +273,7 @@
   </section>
               <!-- Button to show the modal with video -->
    
-
+<section>
    <!-- Video Modal -->
 <div id="videoModal" class="video-modal">
   <div class="video-modal-content">
@@ -292,6 +292,7 @@
       <img src="Letter/15Artemis.jpg" alt="Popup Picture">
   </div>
 </div>
+</section>
 
   
   
@@ -483,8 +484,6 @@
   </footer>
 
 
-
-
 <script>
   
   function openModal(imageSrc) {
@@ -494,60 +493,11 @@
     modal.style.display = 'block'; // Show the modal
 }
 
-function closeModal() {
-    const modal = document.getElementById('myModal');
-    modal.style.display = 'none'; // Hide the modal
+// Close modal (generic for all modals)
+function closeModal(modalId = 'myModal') {
+  const modal = document.getElementById(modalId);
+  modal.style.display = 'none'; // Hide the modal
 }
-
-/*
-   const video = document.getElementById('autoPlayVideo');
-    const backgroundMusic = document.getElementById('backgroundMusic');
-    const scrollingMusic = document.getElementById('scrollingMusic');
-    let scrollingMusicStarted = false;
-
-    // Start scrolling background music on first scroll
-    window.addEventListener('scroll', () => {
-      if (!scrollingMusicStarted) {
-        scrollingMusic.play();
-        scrollingMusicStarted = true; // Ensure it only starts once
-      }
-    });
-
-    // IntersectionObserver to detect when the video is in view
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Pause scrolling music and play video music when video is in view
-          scrollingMusic.pause();
-          video.classList.add('visible');
-          video.play();
-          backgroundMusic.play();
-        } else {
-          // If the video is paused, resume scrolling music when out of view
-          if (video.paused) {
-            scrollingMusic.play();
-          }
-          video.pause();
-          backgroundMusic.pause();
-        }
-      });
-    });
-
-    // Observe the video element
-    observer.observe(video);
-
-    // Pause background music and resume scrolling music when the video is manually paused
-    video.addEventListener('pause', () => {
-      backgroundMusic.pause();
-      scrollingMusic.play(); // Resume scrolling music
-    });
-
-    // Play background music and pause scrolling music when the video is manually played
-    video.addEventListener('play', () => {
-      backgroundMusic.play();
-      scrollingMusic.pause(); // Pause scrolling music
-    }); */
-
 
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -559,7 +509,7 @@ function closeModal() {
             setTimeout(() => {
                 item.classList.add('visible');
             }, delay);
-            delay += 3000; // Adjust the delay time for each item
+            delay += 2000; // Adjust the delay time for each item
         });
 
         // Reset after all items have been shown
@@ -575,25 +525,114 @@ function closeModal() {
     animateText(); // Start the animation
 });
 
-const lpSection = document.querySelector('.lp-section'); // Target your specific section
 
-lpSection.addEventListener('mousemove', (e) => {
+
+//--------------------------------------------------------------------------------------
+
+// Function to create sparkle effect for the original section
+function createSparkle(e) {
   const sparkle = document.createElement('div');
   sparkle.classList.add('sparkle');
-  
-  // Append sparkles to the lp-section
+
+  // Append sparkles to the original section
   lpSection.appendChild(sparkle);
-  
+
   // Calculate the position relative to the lp-section
   const rect = lpSection.getBoundingClientRect();
   sparkle.style.left = `${e.clientX - rect.left}px`;
   sparkle.style.top = `${e.clientY - rect.top}px`;
-  
+
   // Remove sparkle after animation completes
   setTimeout(() => {
     sparkle.remove();
   }, 1000); // Match the animation duration (1s)
-});
+}
+
+// Function to create sparkle effect for the new section
+function createSparkleAnother(e) {
+  const sparkle = document.createElement('div');
+  sparkle.classList.add('sparkle-another');
+
+  // Append sparkles to the new section
+  anotherSection.appendChild(sparkle);
+
+  // Calculate the position relative to the another-section
+  const rect = anotherSection.getBoundingClientRect();
+  sparkle.style.left = `${e.clientX - rect.left}px`;
+  sparkle.style.top = `${e.clientY - rect.top}px`;
+
+  // Remove sparkle after animation completes
+  setTimeout(() => {
+    sparkle.remove();
+  }, 1000); // Match the animation duration (1s)
+}
+
+// Function to create sparkle effect for another new section
+function createSparkleAnother1(e) {
+  const sparkle = document.createElement('div');
+  sparkle.classList.add('sparkle-another1'); // Use the new sparkle class
+
+  // Append sparkles to the new section
+  anotherSection1.appendChild(sparkle);
+
+  // Calculate the position relative to the another-section
+  const rect = anotherSection1.getBoundingClientRect();
+  sparkle.style.left = `${e.clientX - rect.left}px`;
+  sparkle.style.top = `${e.clientY - rect.top}px`;
+
+  // Remove sparkle after animation completes
+  setTimeout(() => {
+    sparkle.remove();
+  }, 1000); // Match the animation duration (1s)
+}
+
+// Corrected Sparkle Effect for the fourth section
+function createSparkleAnother2(e) {
+    console.log('Creating sparkles in wp-section'); // Add this for debugging
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('sparkle-another2'); // Correct class name
+
+    // Append sparkles to the new section
+    anotherSection2.appendChild(sparkle);
+
+    // Calculate the position relative to the wp-section
+    const rect = anotherSection2.getBoundingClientRect();
+    sparkle.style.left = `${e.clientX - rect.left}px`;
+    sparkle.style.top = `${e.clientY - rect.top}px`;
+
+    // Remove sparkle after animation completes
+    setTimeout(() => {
+        sparkle.remove();
+    }, 1000); // Match the animation duration (1s)
+}
+
+// Select the original section
+const lpSection = document.querySelector('.lp-section');
+
+// Add mousemove event listener to the original section
+lpSection.addEventListener('mousemove', createSparkle);
+
+// Select the new section
+const anotherSection = document.querySelector('.colored-section'); // Replace with your new section class or ID
+
+// Add mousemove event listener to the new section
+anotherSection.addEventListener('mousemove', createSparkleAnother);
+
+// Select the new section for the third sparkle effect
+const anotherSection1 = document.querySelector('.quote-section'); // Replace with your new section class or ID
+
+// Add mousemove event listener to the new section
+anotherSection1.addEventListener('mousemove', createSparkleAnother1);
+
+// Correct the section selection to match the CSS class
+const anotherSection2 = document.querySelector('.wp-section'); // Corrected the class name
+
+// Add mousemove event listener to the new section
+anotherSection2.addEventListener('mousemove', createSparkleAnother2);
+
+
+
+
 
 //-----------------------------------------------------------------------------------------------
 
@@ -708,12 +747,6 @@ function showModalVideo() {
 function showPicture() {
     const pictureModal = document.getElementById('pictureModal');
     pictureModal.style.display = 'flex'; // Show the picture modal
-}
-
-// Function to close any modal
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    modal.style.display = 'none'; // Hide the specified modal
 }
 
 //-----------------------------------------------------------------------------------------------

@@ -39,26 +39,35 @@ p{
   font-size: 15pt;
   font-family: 'Dancing Script', cursive;
 }
+
 .fa-ring {
   color: #3B8EDB;
   margin-left: 20px; /* Space between heading and icon */
 }
+
+
 .container-fluid{
-  padding: 7% 10%;
+  padding: 2% 7%;
 }
+
 .colored-section{
   background-color: #16253b;
   color: #fff;
   background-size: cover;
 }
-.white-section{
-  background-color: #000000;
+
+.wp-section{
+  background-color: #16253b;
+  background-size: cover;
+  position: relative;
+  overflow: hidden; /* To contain the sparkle trail */
 }
 
 .quote-section{
   background-color: #e6c57e;
+  position: relative;
+  overflow: hidden; /* To contain the sparkle trail */
 }
-
 
 
 .lp-section {
@@ -71,11 +80,44 @@ p{
   position: absolute;
   width: 10px;
   height: 10px;
-  background-color: rgba(22, 37, 59, 1.0); /* White sparkles */
+  background-color: rgba(22, 37, 59, 1.0); /* Default sparkles */
   border-radius: 50%; /* Make sparkles circular */
   pointer-events: none; /* Do not interact with sparkles */
   animation: sparkleFade 1s ease-out forwards; /* Fade out effect */
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Glow effect */
+}
+
+.sparkle-another {
+  position: absolute;
+  width: 12px; /* Different size for another section */
+  height: 12px;
+  background-color: rgba(230, 197, 126, 1.0); /* Different color for another section */
+  border-radius: 50%; /* Make sparkles circular */
+  pointer-events: none; /* Do not interact with sparkles */
+  animation: sparkleFadeAnother 1s ease-out forwards; /* Fade out effect */
+  box-shadow: 0 0 15px rgba(230, 197, 126, 1.0); /* Glow effect */
+}
+
+.sparkle-another1 {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: rgba(22, 37, 59, 1.0); /* Default sparkles */
+  border-radius: 50%; /* Make sparkles circular */
+  pointer-events: none; /* Do not interact with sparkles */
+  animation: sparkleFadeAnother1 1s ease-out forwards; /* Fade out effect */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Glow effect */
+}
+
+.sparkle-another2 {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: rgba(230, 197, 126, 1.0); /* Default sparkles */
+  border-radius: 50%; /* Make sparkles circular */
+  pointer-events: none; /* Do not interact with sparkles */
+  animation: sparkleFadeAnother2 1s ease-out forwards; /* Fade out effect */
+  box-shadow: 0 0 10px rgba(230, 197, 126, 1.0); /* Glow effect */
 }
 
 @keyframes sparkleFade {
@@ -85,6 +127,39 @@ p{
   }
   100% {
     transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes sparkleFadeAnother {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3); /* Different scaling effect */
+    opacity: 0;
+  }
+}
+
+@keyframes sparkleFadeAnother1 {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3); /* Different scaling effect */
+    opacity: 0;
+  }
+}
+
+@keyframes sparkleFadeAnother2 {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3); /* Different scaling effect */
     opacity: 0;
   }
 }
@@ -225,7 +300,7 @@ p{
 }
 
 .carousel-item img {
-  width: 100%;
+  width: 80%;
   height: auto; /* Maintains the aspect ratio */
   object-fit: cover; /* or use 'contain' based on preference */
 }
@@ -554,6 +629,7 @@ video.visible {
 .text-item.visible {
   opacity: 1;
   transform: translateY(0);
+
 }
 
 
