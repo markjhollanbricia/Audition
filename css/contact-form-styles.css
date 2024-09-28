@@ -1,0 +1,37 @@
+body {
+  background: #ffffff;
+  /* background: linear-gradient(to right,  #054196, #0B2447); */
+}
+
+.bg-image {
+  background: url("../images/DooboosPlace-logos_white.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #0B2447;
+}
+
+.container-fluid{
+  position: absolute;
+  margin-top: 90px;
+}
+
+.float{
+	position: absolute;
+	width:60px;
+	height:60px;
+  top: 20px;
+  left: 20px;
+	background-color:#0A49C8;
+	border-radius:20px;
+}
+
+.my-float{
+  margin-left: 15px;
+	margin-top:29px;
+  color: #ffffff;
+}
+
+.my-float:hover{
+  color: #0B2447;
+}
