@@ -76,6 +76,12 @@ p{
   overflow: hidden; /* To contain the sparkle trail */
 }
 
+.OOTD-section{
+  background-color: #0B2447;
+  position: relative;
+  overflow: hidden; /* To contain the sparkle trail */
+}
+
 .sparkle {
   position: absolute;
   width: 10px;
@@ -84,7 +90,7 @@ p{
   border-radius: 50%; /* Make sparkles circular */
   pointer-events: none; /* Do not interact with sparkles */
   animation: sparkleFade 1s ease-out forwards; /* Fade out effect */
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Glow effect */
+  box-shadow: 0 0 10px rgba(22, 37, 59, 1.0); /* Glow effect */
 }
 
 .sparkle-another {
@@ -106,7 +112,7 @@ p{
   border-radius: 50%; /* Make sparkles circular */
   pointer-events: none; /* Do not interact with sparkles */
   animation: sparkleFadeAnother1 1s ease-out forwards; /* Fade out effect */
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Glow effect */
+  box-shadow: 0 0 10px rgba(22, 37, 59, 1.0); /* Glow effect */
 }
 
 .sparkle-another2 {
@@ -118,6 +124,17 @@ p{
   pointer-events: none; /* Do not interact with sparkles */
   animation: sparkleFadeAnother2 1s ease-out forwards; /* Fade out effect */
   box-shadow: 0 0 10px rgba(230, 197, 126, 1.0); /* Glow effect */
+}
+
+.sparkle-another3 {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: rgba(230, 197, 126, 1.0);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkleFadeAnother3 1s ease-out forwards;
+  box-shadow: 0 0 10px rgba(230, 197, 126, 1.0);
 }
 
 @keyframes sparkleFade {
@@ -160,6 +177,17 @@ p{
   }
   100% {
     transform: scale(3); /* Different scaling effect */
+    opacity: 0;
+  }
+}
+
+@keyframes sparkleFadeAnother3 {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
     opacity: 0;
   }
 }
@@ -321,11 +349,6 @@ p{
 }
 .feature-box{
   padding: 5%;
-}
-
-#testimonials{
-  color: #fff;
-  background-color: #0B2447;
 }
 
 .testimonial-image{

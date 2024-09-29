@@ -145,6 +145,7 @@
 </div>
 
 
+
   <!-- Love Party Rings -->
   <section class="lp-section" id="lovepartyrings">
     <div class="row">
@@ -298,9 +299,9 @@
   
 
   <!-- Testimonials -->
-  <section id="testimonials">
+  <section id="testimonials" class="OOTD-section">
     <div id="testimonial-carousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner" style="background-color: #16253b;">
+      <div class="carousel-inner">
         <div class="carousel-item active container-fluid">
           <h2 class="testimonial-text" style="color:#e6c57e; font-family: 'Dancing Script', cursive; ">OOTD</h2>
           <div class="row" alt="8-profile">
@@ -327,7 +328,7 @@
         </div>
 
         <div class="carousel-item container-fluid">
-        <h2 class="testimonial-text" style="color:#e6c57e">OOTD</h2>
+          <h2 class="testimonial-text" style="color:#e6c57e; font-family: 'Dancing Script', cursive; ">OOTD</h2>
         <div class="row" alt="7-profile">
           <div class="col-lg-6">
             <img id="img6" class="testimonial-image" data-src="OOTD/6.jpg" onclick="openModal(this.getAttribute('data-src'))" src="OOTD/6.jpg" >
@@ -352,7 +353,7 @@
       </div>
 
       <div class="carousel-item container-fluid">
-        <h2 class="testimonial-text" style="color:#e6c57e">OOTD</h2>
+        <h2 class="testimonial-text" style="color:#e6c57e; font-family: 'Dancing Script', cursive; ">OOTD</h2>
         <div class="row" alt="6-profile">
           <div class="col-lg-6">
             <img id="img6" class="testimonial-image" data-src="OOTD/11.jpg" onclick="openModal(this.getAttribute('data-src'))" src="OOTD/11.jpg" >
@@ -375,7 +376,7 @@
        </div>
 
         <div class="carousel-item container-fluid">
-          <h2 class="testimonial-text" style="color:#e6c57e">OOTD</h2>
+          <h2 class="testimonial-text" style="color:#e6c57e; font-family: 'Dancing Script', cursive; ">OOTD</h2>
           <div class="row" alt="5-profile">
             <div class="col-lg-6">
               <img id="img6" class="testimonial-image" data-src="OOTD/16.jpg" onclick="openModal(this.getAttribute('data-src'))" src="OOTD/16.jpg" >
@@ -398,7 +399,7 @@
         </div>
 
           <div class="carousel-item container-fluid">
-            <h2 class="testimonial-text" style="color:#e6c57e">OOTD</h2>
+            <h2 class="testimonial-text" style="color:#e6c57e; font-family: 'Dancing Script', cursive; ">OOTD</h2>
             <div class="row" alt="4-profile">
               <div class="col-lg-6">
                 <img id="img6" class="testimonial-image" data-src="OOTD/21.jpg" onclick="openModal(this.getAttribute('data-src'))" src="OOTD/21.jpg" >
@@ -421,7 +422,7 @@
           </div>
 
             <div class="carousel-item container-fluid">
-              <h2 class="testimonial-text" style="color:#e6c57e">OOTD</h2>
+              <h2 class="testimonial-text" style="color:#e6c57e; font-family: 'Dancing Script', cursive; ">OOTD</h2>
               <div class="row" alt="3-profile">
                 <div class="col-lg-6">
                   <img id="img6" class="testimonial-image" data-src="OOTD/26.jpg" onclick="openModal(this.getAttribute('data-src'))" src="OOTD/26.jpg" >
@@ -469,10 +470,15 @@
     <div>
 
       <div id="spotifyContainer"></div> <!-- Empty div to dynamically inject Spotify iframe -->
-   
-
-
   </section>
+
+
+  <audio id="background-music" loop>
+    <source src="lemonade.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+
   <!-- Footer -->
   <footer class="white-section" id="footer">
         <i class="social-icon fa-brands fa-airbnb"></i>
@@ -482,6 +488,8 @@
     <p>© Copyright Mak&Eun</p>
 
   </footer>
+
+
 
 
 <script>
@@ -606,6 +614,25 @@ function createSparkleAnother2(e) {
     }, 1000); // Match the animation duration (1s)
 }
 
+function createSparkleAnother3(e) {
+    console.log('Creating sparkles in wp-section'); // Add this for debugging
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('sparkle-another3'); // Correct class name
+
+    // Append sparkles to the new section
+    anotherSection3.appendChild(sparkle);
+
+    // Calculate the position relative to the wp-section
+    const rect = anotherSection3.getBoundingClientRect();
+    sparkle.style.left = `${e.clientX - rect.left}px`;
+    sparkle.style.top = `${e.clientY - rect.top}px`;
+
+    // Remove sparkle after animation completes
+    setTimeout(() => {
+        sparkle.remove();
+    }, 1000); // Match the animation duration (1s)
+}
+
 // Select the original section
 const lpSection = document.querySelector('.lp-section');
 
@@ -630,12 +657,24 @@ const anotherSection2 = document.querySelector('.wp-section'); // Corrected the 
 // Add mousemove event listener to the new section
 anotherSection2.addEventListener('mousemove', createSparkleAnother2);
 
+// Correct the section selection to match the CSS class
+const anotherSection3 = document.querySelector('.OOTD-section'); // Corrected the class name
+
+// Add mousemove event listener to the new section
+anotherSection3.addEventListener('mousemove', createSparkleAnother3);
+
 
 
 
 
 //-----------------------------------------------------------------------------------------------
 
+window.addEventListener('load', function() {
+    const audio = document.getElementById('background-music');
+    audio.play().catch(() => {
+        console.log("Autoplay prevented, trying to start playback on interaction.");
+    });
+});
 
 
 
@@ -751,28 +790,7 @@ function showPicture() {
 
 //-----------------------------------------------------------------------------------------------
 
-let spotifyInjected = false; // Flag to prevent multiple inserts
 
-window.addEventListener('scroll', function() {
-    if (!spotifyInjected) {
-        const spotifyContainer = document.getElementById('spotifyContainer');
-        const spotifyIframe = document.createElement('iframe');
-        
-        // Set attributes for the Spotify iframe
-        spotifyIframe.src = "https://open.spotify.com/embed/playlist/5HHXZLmtfcURvqpGHroq2G?utm_source=generator&theme=0?autoplay=1";
-        spotifyIframe.width = "300";
-        spotifyIframe.height = "380";
-        spotifyIframe.frameBorder = "0";
-        spotifyIframe.allow = "encrypted-media";
-        spotifyIframe.allowTransparency = "true";
-
-        // Append the iframe to the container
-        spotifyContainer.appendChild(spotifyIframe);
-
-        // Set flag to true after injecting the iframe
-        spotifyInjected = true;
-    }
-});
 
 //-----------------------------------------------------------------------------------------------        
 </script>
