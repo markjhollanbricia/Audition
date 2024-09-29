@@ -447,7 +447,7 @@
 
             <div>
               <button class="carousel-control-prev" type="button" data-bs-target="#testimonial-carousel" data-bs-slide="prev" >
-                <span class="carousel-control-prev-icon "  aria-hidden="true"></span>
+                <span class="carousel-control-prev-icon"  aria-hidden="true"></span>
                 <span class="visually-hidden" >Previous</span>
               </button>
               <button class="carousel-control-next" type="button" data-bs-target="#testimonial-carousel" data-bs-slide="next">
@@ -465,14 +465,87 @@
 </section>
 
   <!-- Call to Action -->
+    <section class="colored-section" id="cta">
+      <h2 class="carousel-text">REVIEWS</h2>
+      <div id="carouselControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active container-fluid">
+                <img class="d-block w-100" src="Reviews/1.png" alt="First-slide">
+          </div>
+  
+          <div class="carousel-item container-fluid">
+                <img class="d-block w-100" src="Reviews/2.png" alt="Second-slide">
+          </div>
+  
+          <div class="carousel-item container-fluid">
+              <img class="d-block w-100" src="Reviews/3.png" alt="Third-slide">
+          </div>
+  
+          <div class="carousel-item container-fluid">
+              <img class="d-block w-100" src="Reviews/4.png" alt="Fourth-slide">
+          </div>
+  
+          <div class="carousel-item container-fluid">
+              <img class="d-block w-100" src="Reviews/5.png" alt="Fifth-slide">
+          </div>
+  
+          <div class="carousel-item container-fluid">
+              <img class="d-block w-100" src="Reviews/6.png" alt="Sixth-slide">
+          </div>
+  
+          <div class="carousel-item container-fluid">
+              <img class="d-block w-100" src="Reviews/7.png" alt="Seventh-slide">
+          </div>
+  
+          <div class="carousel-item container-fluid">
+              <img class="d-block w-100" src="Reviews/8.png" alt="Eighth-slide">
+          </div>
+  
+          <div class="carousel-item container-fluid">
+              <img class="d-block w-100" src="Reviews/9.png" alt="Ninth-slide">
+          </div>
+  
+          <div class="carousel-item container-fluid">
+              <img class="d-block w-100" src="Reviews/10.png" alt="Tenth-slide">
+          </div>
 
-  <section class="colored-section" id="cta">
-    <div>
+          <div class="carousel-item container-fluid">
+            <img class="d-block w-100" src="Reviews/11.png" alt="Eleventh-slide">
+          </div>
 
-      <div id="spotifyContainer"></div> <!-- Empty div to dynamically inject Spotify iframe -->
-  </section>
+         <div class="carousel-item container-fluid">
+          <img class="d-block w-100" src="Reviews/12.png" alt="Twelfth-slide">
+         </div>
 
+         <div class="carousel-item container-fluid">
+          <img class="d-block w-100" src="Reviews/13.png" alt="Thirteenth-slide">
+         </div>
 
+         <div class="carousel-item container-fluid">
+          <img class="d-block w-100" src="Reviews/14.png" alt="Fourteenth-slide">
+         </div>
+
+         <div class="carousel-item container-fluid">
+          <img class="d-block w-100" src="Reviews/15.png" alt="Fifteenth-slide">
+         </div>
+  
+
+  
+  
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev" >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+  
+    </section>
+
+      
   <audio id="background-music" loop>
     <source src="lemonade.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
@@ -499,6 +572,7 @@
     const modalImage = document.getElementById('modalImage');
     modalImage.src = imageSrc;
     modal.style.display = 'block'; // Show the modal
+    currentIndex = images.indexOf(imageSrc); // Set the index of the current image
 }
 
 // Close modal (generic for all modals)
@@ -677,11 +751,6 @@ window.addEventListener('load', function() {
 });
 
 
-
-
-
-
-
 //-----------------------------------------------------------------------------------------------
 
 
@@ -790,7 +859,20 @@ function showPicture() {
 
 //-----------------------------------------------------------------------------------------------
 
+window.onclick = function(event) {
+    const modal = document.getElementById("myModal");
+    const modalImage = document.getElementById("modalImage");
+    if (event.target === modal) { // Check if clicked outside the image
+      closeModal();
+    }
+  }
 
+  document.addEventListener('keydown', function(event) {
+    const modal = document.getElementById("myModal");
+    if (event.key === 'Escape' && modal.style.display === "block") {
+      closeModal();
+    }
+  });
 
 //-----------------------------------------------------------------------------------------------        
 </script>
