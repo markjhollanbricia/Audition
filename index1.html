@@ -71,7 +71,7 @@
 
           <!-- Hidden Paragraph -->
           <h1 class="big-heading hidden" id="welcome-message" style="color: #e6c57e;">
-              Welcome to our personal archive of shared memories. From our first connection within the dynamic world of Audition Next Level to becoming a couple both in-game and in real life, our journey has been one of rhythm, dance, and lasting moments. This site captures our favorite experiences, from screenshots to stories, highlighting the evolution of our relationship. We invite you to explore and relive the special moments that define our virtual and real-life bond.
+              Welcome to our personal archive of shared memories.<br> From our first connection within the dynamic world of <br> Audition Next Level to becoming a couple both in-game<br> and in real life, our journey has been one of rhythm, dance, and <br> lasting moments. This site captures our favorite experiences, from <br> screenshots to stories, highlighting the evolution of our relationship.<br> We invite you to explore and relive the special moments that define our <br> virtual and real-life bond.
           </h1>
         </div>
 
@@ -479,7 +479,7 @@
       <h2 class="carousel-text">REVIEWS</h2>
       <div id="carouselControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <div class="carousel-item active container-fluid">
+          <div class="carousel-item-rev active container-fluid">
                 <img class="d-block w-100" src="Reviews/1.png" alt="First-slide">
           </div>
   
@@ -560,7 +560,7 @@
       <h1 id="timer"></h1>
   </div>
 
-  <audio id="bg-music" src="lemonade.mp3"></audio>
+  <audio id="bg-music" src="lemonade.mp3" preload="auto"></audio> <!-- Replace with your music file -->
 
 
   <!-- Footer -->
@@ -888,34 +888,11 @@ window.onclick = function(event) {
     }
   });
 
-  let timer = document.getElementById('timer');
-let music = document.getElementById('bg-music');
-let count = 0;
-let timerStarted = false;
+    //-----------------------------------------------------------------------------------------------  
 
-document.body.addEventListener('click', function () {
-    if (!timerStarted) {
-        timerStarted = true;  // Ensure the timer starts only once
-
-        // Start the timer
-        let interval = setInterval(() => {
-            count++;
-            timer.textContent = count;
-
-            if (count === 2) {
-                music.play();  // Play music when timer hits 2 seconds
-            }
-
-            if (count >= 10) {  // Stop the timer after 10 seconds
-                clearInterval(interval);
-            }
-        }, 1000);
-    }
-});
-
-
-let heartContainer = document.getElementById('heart-container');
+    let heartContainer = document.getElementById('heart-container');
 let welcomeMessage = document.getElementById('welcome-message');
+let music = document.getElementById('bg-music');
 
 heartContainer.addEventListener('click', function() {
     // Fade out the heart container (icon and tap message together)
@@ -930,10 +907,13 @@ heartContainer.addEventListener('click', function() {
         welcomeMessage.classList.add('visible');  // Add the visible class
         
         // Trigger the fade-in effect
-        setTimeout(() => {
-            welcomeMessage.style.opacity = '1'; // Make the message fully visible
-        }, 100);  // Small delay to ensure the class change takes effect
+        welcomeMessage.style.opacity = '1'; // Make the message fully visible
     }, 2000);  // Matches the CSS transition duration
+
+    // Play background music after a 2-second delay
+    setTimeout(() => {
+        music.play(); // Play the music
+    }, 2000);  // 2 seconds delay before playing music
 });
 
 

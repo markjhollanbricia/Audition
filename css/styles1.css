@@ -339,6 +339,16 @@ p{
   object-fit: cover; /* or use 'contain' based on preference */
 }
 
+.carousel-item-rev img {
+  width: 10%; /* Set your desired width */
+  height: auto; /* Maintain aspect ratio */
+  margin: 0 auto; /* Center the image */
+}
+
+
+
+
+
 
 
 .icon{
@@ -793,7 +803,7 @@ video.visible {
 }
 
 .heart {
-  font-size: 200px;  /* Adjust size of the heart icon */
+  font-size: 250px;  /* Adjust size of the heart icon */
   color: #e6c57e;
   cursor: pointer;
   transition: opacity 2s ease; /* Fades the heart out */
