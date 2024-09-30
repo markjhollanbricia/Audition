@@ -23,7 +23,10 @@
 
 <body>
 
-
+  <script src="js/ogv.js"></script>
+  <!-- Optionally include worker files for better performance -->
+  <script src="js/ogv-worker-audio.js"></script>
+  <script src="js/ogv-worker-video.js"></script>
 
 
   <!-- arrow up -->
@@ -476,12 +479,12 @@
 
   <!-- Call to Action -->
     <section class="rev-section" id="reviews">
-      <h2 class="carousel-text" style="font-family: 'Dancing Script', cursive;">REVIEWS</h2>
+      <h2 class="carousel-text" style="font-family: 'Dancing Script', cursive;">Messages</h2>
       <div id="carouselControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active container-fluid">
             
-            <div class="reviews-container">
+            <div class="reviews-container" style="color:#16253b">
               <p1 style="font-size: 50px;">"REYNAA"</p1>
               <br>
               <br>
@@ -937,7 +940,11 @@ Lastly, remember that good things take time. You know what I mean. Haha. Love yo
 
 
   
-  <audio id="bg-music" src="riverflows.ogg" preload="auto" loop></audio> <!-- Replace with your music file -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="riverflows.ogg" type="audio/ogg">
+    <source src="riverflows.ogg" type="audio/webm">
+    Your browser does not support the audio element.
+  </audio>
 
 
   <!-- Footer -->
@@ -1292,30 +1299,53 @@ window.onclick = function(event) {
 
     //-----------------------------------------------------------------------------------------------  
 
-let heartContainer = document.getElementById('heart-container');
+    let heartContainer = document.getElementById('heart-container');
 let welcomeMessage = document.getElementById('welcome-message');
 let music = document.getElementById('bg-music');
 
-heartContainer.addEventListener('click', function() {
+// Check if the browser supports Ogg or WebM
+function canPlayOggOrWebM() {
+    const audio = document.createElement('audio');
+    return !!(audio.canPlayType && (audio.canPlayType('audio/ogg') || audio.canPlayType('audio/webm')));
+}
+
+// If the browser doesn't support Ogg or WebM, use ogv.js to play the audio
+function playWithFallback(audioElement) {
+    if (!canPlayOggOrWebM()) {
+        const ogvPlayer = new OGVPlayer();
+        ogvPlayer.src = audioElement.querySelector('source').src;
+
+        // Replace the audio element with the OGVPlayer instance
+        audioElement.parentNode.replaceChild(ogvPlayer, audioElement);
+
+        ogvPlayer.play();  // Start playback
+    } else {
+        // If supported, play the audio normally
+        audioElement.play();
+    }
+}
+
+// Click event for the heart container
+heartContainer.addEventListener('click', function () {
     // Fade out the heart container (icon and tap message together)
     heartContainer.style.opacity = '0';
 
     // After the fade-out animation ends (2s), hide the heart container and show the message
     setTimeout(() => {
-        heartContainer.style.display = 'none';  // Hide the heart container completely
+        heartContainer.style.display = 'none'; // Hide the heart container completely
 
         // Show the welcome message
         welcomeMessage.classList.remove('hidden'); // Remove the hidden class
-        welcomeMessage.classList.add('visible');  // Add the visible class
-        
+        welcomeMessage.classList.add('visible'); // Add the visible class
+
         // Trigger the fade-in effect
         welcomeMessage.style.opacity = '1'; // Make the message fully visible
-    }, 2000);  // Matches the CSS transition duration
+    }, 2000); // Matches the CSS transition duration
 
     // Play background music after a 2-second delay
     setTimeout(() => {
-        music.play(); // Play the music
-    }, 1000);  // 2 seconds delay before playing music
+        playWithFallback(music); // Check if fallback is needed before playing
+    }, 1000); // 2 seconds delay before playing music
 });
 
 
