@@ -54,7 +54,7 @@
               <a class="nav-link " href="#testimonials" style="color: #e6c57e;">OOTD</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="#Contact" style="color: #e6c57e;">On Our Wedding Day</a>
+              <a class="nav-link " href="#reviews" style="color: #e6c57e;">Reviews</a>
             </li>
           </ul>
         </div>
@@ -64,7 +64,15 @@
 
       <div class="row">
         <div class="col-lg-6">
-          <h1 class="big-heading" style = "color:#e6c57e">Welcome to our personal archive of shared memories. From our first connection within the dynamic world of Audition Next Level to becoming a couple both in-game and in real life, our journey has been one of rhythm, dance, and lasting moments. This site captures our favorite experiences, from screenshots to stories, highlighting the evolution of our relationship. We invite you to explore and relive the special moments that define our virtual and real-life bond.</h1>
+          <div class="heart-container" id="heart-container">
+            <i class="fa-solid fa-heart heart" id="heart-icon"></i>
+            <p class="tap-message">Tap to see hidden message</p>
+        </div>
+
+          <!-- Hidden Paragraph -->
+          <h1 class="big-heading hidden" id="welcome-message" style="color: #e6c57e;">
+              Welcome to our personal archive of shared memories. From our first connection within the dynamic world of Audition Next Level to becoming a couple both in-game and in real life, our journey has been one of rhythm, dance, and lasting moments. This site captures our favorite experiences, from screenshots to stories, highlighting the evolution of our relationship. We invite you to explore and relive the special moments that define our virtual and real-life bond.
+          </h1>
         </div>
 
         <div class="col-lg-6">
@@ -444,6 +452,8 @@
                 </div>
               </div>  
             </div>
+          </div>
+
 
             <div>
               <button class="carousel-control-prev" type="button" data-bs-target="#testimonial-carousel" data-bs-slide="prev" >
@@ -458,14 +468,14 @@
 
       </div>
     </div>
-
+  </div>
 
  
 
 </section>
 
   <!-- Call to Action -->
-    <section class="colored-section" id="cta">
+    <section class="rev-section" id="reviews">
       <h2 class="carousel-text">REVIEWS</h2>
       <div id="carouselControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -546,10 +556,11 @@
     </section>
 
       
-  <audio id="background-music" loop>
-    <source src="lemonade.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
+    <div class="container">
+      <h1 id="timer"></h1>
+  </div>
+
+  <audio id="bg-music" src="lemonade.mp3"></audio>
 
 
   <!-- Footer -->
@@ -867,6 +878,9 @@ window.onclick = function(event) {
     }
   }
 
+
+  //-----------------------------------------------------------------------------------------------    
+
   document.addEventListener('keydown', function(event) {
     const modal = document.getElementById("myModal");
     if (event.key === 'Escape' && modal.style.display === "block") {
@@ -874,7 +888,56 @@ window.onclick = function(event) {
     }
   });
 
-//-----------------------------------------------------------------------------------------------        
+  let timer = document.getElementById('timer');
+let music = document.getElementById('bg-music');
+let count = 0;
+let timerStarted = false;
+
+document.body.addEventListener('click', function () {
+    if (!timerStarted) {
+        timerStarted = true;  // Ensure the timer starts only once
+
+        // Start the timer
+        let interval = setInterval(() => {
+            count++;
+            timer.textContent = count;
+
+            if (count === 2) {
+                music.play();  // Play music when timer hits 2 seconds
+            }
+
+            if (count >= 10) {  // Stop the timer after 10 seconds
+                clearInterval(interval);
+            }
+        }, 1000);
+    }
+});
+
+
+let heartContainer = document.getElementById('heart-container');
+let welcomeMessage = document.getElementById('welcome-message');
+
+heartContainer.addEventListener('click', function() {
+    // Fade out the heart container (icon and tap message together)
+    heartContainer.style.opacity = '0';
+
+    // After the fade-out animation ends (2s), hide the heart container and show the message
+    setTimeout(() => {
+        heartContainer.style.display = 'none';  // Hide the heart container completely
+
+        // Show the welcome message
+        welcomeMessage.classList.remove('hidden'); // Remove the hidden class
+        welcomeMessage.classList.add('visible');  // Add the visible class
+        
+        // Trigger the fade-in effect
+        setTimeout(() => {
+            welcomeMessage.style.opacity = '1'; // Make the message fully visible
+        }, 100);  // Small delay to ensure the class change takes effect
+    }, 2000);  // Matches the CSS transition duration
+});
+
+
+    
 </script>
 
 </body>
