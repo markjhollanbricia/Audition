@@ -57,7 +57,7 @@
               <a class="nav-link " href="#testimonials" style="color: #e6c57e;">OOTD</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="#reviews" style="color: #e6c57e;">Reviews</a>
+              <a class="nav-link " href="#reviews" style="color: #e6c57e;">Messages</a>
             </li>
           </ul>
         </div>
@@ -286,7 +286,7 @@
               <!-- Button to show the modal with video -->
    
 <section>
-   <!-- Video Modal 
+  
 <div id="videoModal" class="video-modal">
   <div class="video-modal-content">
       <span class="close" onclick="closeModal('videoModal')">&times;</span> 
@@ -295,13 +295,13 @@
           Your browser does not support the video tag.
       </video>
   </div>
-</div>-->
+</div>
 
 <!-- Picture Modal (hidden initially) -->
 <div id="pictureModal" class="picture-modal">
   <div class="picture-modal-content">
       <span class="close" onclick="closeModal('pictureModal')">&times;</span> <!-- X button -->
-      <img src="Letter/15Artemis.jpg" alt="Popup Picture">
+      <img src="Letter/16Helios.png" alt="Popup Picture">
   </div>
 </div>
 </section>
@@ -925,7 +925,7 @@ Lastly, remember that good things take time. You know what I mean. Haha. Love yo
   
     </section>
 
-     <!--
+
     <section class="games-section" id="games">
       <a href="https://forms.gle/aYkKAiGQyG8dAaMi8" target="_blank" style="display: block; text-decoration: none; color: inherit;">
           <h2 style="font-family: 'Dancing Script', cursive; color:#e6c57e;">Games</h2>
@@ -935,16 +935,24 @@ Lastly, remember that good things take time. You know what I mean. Haha. Love yo
       <a href="https://forms.gle/g5cHeDWyFc2c2ENAA" target="_blank" style="display: block; text-decoration: none; color: inherit;">
         <p>Click here to participate She said, He said</p> 
      </a>
-  </section>-->
+  </section>
 
 
 
   
   <audio id="bg-music" loop preload="auto">
-    <source src="riverflows.ogg" type="audio/ogg">
-    <source src="riverflows.ogg" type="audio/webm">
+    <source src="lemonade.ogg" type="audio/ogg">
+    <source src="lemonade.webm" type="audio/webm">
     Your browser does not support the audio element.
   </audio>
+
+  <audio id="another-music" preload="auto">
+    <source src="riverflows.ogg" type="audio/ogg">
+    <source src="riverflows.webm" type="audio/webm">
+    Your browser does not support the audio element.
+  </audio>
+
+
 
 
   <!-- Footer -->
@@ -958,7 +966,9 @@ Lastly, remember that good things take time. You know what I mean. Haha. Love yo
   </footer>
 
 
-
+ <script src="https://cdn.jsdelivr.net/npm/ogv@1.7.10/ogv.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ogv@1.7.10/ogv-worker-audio.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ogv@1.7.10/ogv-worker-video.js"></script>
 
 <script>
   
@@ -972,8 +982,22 @@ Lastly, remember that good things take time. You know what I mean. Haha. Love yo
 
 // Close modal (generic for all modals)
 function closeModal(modalId = 'myModal') {
-  const modal = document.getElementById(modalId);
-  modal.style.display = 'none'; // Hide the modal
+    const modal = document.getElementById(modalId);
+    modal.style.display = 'none'; // Hide the modal
+
+    // Check if closing the video modal
+    if (modalId === 'videoModal') {
+        anotherMusic.pause(); // Stop another music
+        anotherMusic.currentTime = 0; // Reset playback time
+        bgMusic.play(); // Resume background music
+    }
+
+    // Check if closing the picture modal
+    if (modalId === 'pictureModal') {
+        anotherMusic.pause(); // Stop another music
+        anotherMusic.currentTime = 0; // Reset playback time
+        bgMusic.play(); // Resume background music
+    }
 }
 
 
@@ -1183,8 +1207,6 @@ window.addEventListener('load', function() {
     changingImage4: 0,
 };
 
-//-----------------------------------------------------------------------------------------------
-
 const imageSets = {
     changingImage1: [
         "https://garden.sssolfege.com/img/ring/iconring_13_00.png",
@@ -1249,12 +1271,23 @@ function changeImage() {
 setInterval(changeImage, 100);
 
 //-----------------------------------------------------------------------------------------------
+
+
+let heartContainer = document.getElementById('heart-container');
+let welcomeMessage = document.getElementById('welcome-message');
+let bgMusic = document.getElementById('bg-music');
+let anotherMusic = document.getElementById('another-music');
+
 function showModalVideo() {
     const videoModal = document.getElementById('videoModal');
     const videoElement = document.getElementById('videoElement');
 
     // Display the video modal
     videoModal.style.display = 'flex';
+
+    // Pause background music and play another music
+    bgMusic.pause();
+    anotherMusic.play();
 
     // Play the video automatically
     videoElement.play().then(() => {
@@ -1267,7 +1300,7 @@ function showModalVideo() {
     videoElement.onended = function() {
         console.log("Video ended.");
         videoModal.style.display = 'none'; // Hide the video modal
-        setTimeout(showPicture, 500); // Show the picture modal after 1 second
+        showPicture(); // Show the picture modal after the video ends
     };
 }
 
@@ -1297,59 +1330,54 @@ window.onclick = function(event) {
     }
   });
 
+  document.addEventListener('keydown', function(event) {
+        if (document.getElementById('myModal').style.display === 'block') { // Check if modal is open
+            if (event.key === 'ArrowRight') {
+                navigateImage(1); // Next image
+            } else if (event.key === 'ArrowLeft') {
+                navigateImage(-1); // Previous image
+            }
+        }
+    });
+
+
+
     //-----------------------------------------------------------------------------------------------  
 
-    let heartContainer = document.getElementById('heart-container');
-let welcomeMessage = document.getElementById('welcome-message');
-let music = document.getElementById('bg-music');
 
-// Check if the browser supports Ogg or WebM
-function canPlayOggOrWebM() {
-    const audio = document.createElement('audio');
-    return !!(audio.canPlayType && (audio.canPlayType('audio/ogg') || audio.canPlayType('audio/webm')));
-}
 
-// If the browser doesn't support Ogg or WebM, use ogv.js to play the audio
-function playWithFallback(audioElement) {
-    if (!canPlayOggOrWebM()) {
-        const ogvPlayer = new OGVPlayer();
-        ogvPlayer.src = audioElement.querySelector('source').src;
-
-        // Replace the audio element with the OGVPlayer instance
-        audioElement.parentNode.replaceChild(ogvPlayer, audioElement);
-
-        ogvPlayer.play();  // Start playback
-    } else {
-        // If supported, play the audio normally
-        audioElement.play();
+    function canPlayOggOrWebM() {
+        const audio = document.createElement('audio');
+        return !!(audio.canPlayType && (audio.canPlayType('audio/ogg') || audio.canPlayType('audio/webm')));
     }
-}
 
-// Click event for the heart container
-heartContainer.addEventListener('click', function () {
-    // Fade out the heart container (icon and tap message together)
+    function playWithFallback(audioElement) {
+        if (!canPlayOggOrWebM()) {
+            const ogvPlayer = new OGVPlayer();
+            ogvPlayer.src = audioElement.querySelector('source').src;
+            audioElement.parentNode.replaceChild(ogvPlayer, audioElement);
+            ogvPlayer.play();
+        } else {
+            audioElement.play();
+        }
+    }
+
+    heartContainer.addEventListener('click', function () {
     heartContainer.style.opacity = '0';
-
-    // After the fade-out animation ends (2s), hide the heart container and show the message
     setTimeout(() => {
-        heartContainer.style.display = 'none'; // Hide the heart container completely
-
-        // Show the welcome message
-        welcomeMessage.classList.remove('hidden'); // Remove the hidden class
-        welcomeMessage.classList.add('visible'); // Add the visible class
-
-        // Trigger the fade-in effect
-        welcomeMessage.style.opacity = '1'; // Make the message fully visible
-    }, 2000); // Matches the CSS transition duration
-
-    // Play background music after a 2-second delay
+        heartContainer.style.display = 'none';
+        welcomeMessage.classList.remove('hidden');
+        welcomeMessage.classList.add('visible');
+        welcomeMessage.style.opacity = '1';
+    }, 2000);
     setTimeout(() => {
-        playWithFallback(music); // Check if fallback is needed before playing
-    }, 1000); // 2 seconds delay before playing music
+        bgMusic.play();
+    }, 1000);
 });
 
 
     
+
 </script>
 
 </body>
