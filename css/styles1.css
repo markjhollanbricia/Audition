@@ -58,7 +58,8 @@ p{
 .games-section{
   background-color: #16253b;
   color: #fff;
-  background-size: cover;
+  position: relative;
+  overflow: hidden; /* To contain the sparkle trail */
 }
 
 .wp-section{
@@ -159,6 +160,17 @@ p{
   box-shadow: 0 0 10px rgba(22, 37, 59, 1.0);
 }
 
+.sparkle-another5 {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: rgba(230, 197, 126, 1.0);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkleFadeAnother5 1s ease-out forwards;
+  box-shadow: 0 0 10px rgba(230, 197, 126, 1.0);
+}
+
 @keyframes sparkleFade {
   0% {
     transform: scale(1);
@@ -215,6 +227,17 @@ p{
 }
 
 @keyframes sparkleFadeAnother4 {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes sparkleFadeAnother5 {
   0% {
     transform: scale(1);
     opacity: 1;
@@ -604,6 +627,44 @@ p{
   cursor: pointer;
 }
 
+/* Modal Styles */
+.gallery-modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+}
+
+.gallery-image {
+  margin: auto;
+  display: block;
+  width: 80%; /* Max width */
+  max-width: 700px; /* Max width */
+}
+
+.gallery-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+}
+
+.prev, .next {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  margin: 0 15px;
+}
+
 .item-hover{
   opacity: 0.7;
   cursor: pointer;
@@ -763,7 +824,7 @@ video.visible {
 }
 
 .video-modal-content, .picture-modal-content {
-  background-color: #fff;
+  background-color: #000000;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
@@ -860,6 +921,32 @@ video.visible {
 .visible {
   opacity: 1; /* Make the message fully visible */
   visibility: visible; /* Allow interaction */
+}
+
+.games-section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  text-align: center; /* Center the title */
+  width: 100%; /* Ensure it takes full width */
+  margin-bottom: 20px; /* Space between the title and columns */
+}
+
+.game-column {
+  width: 48%; /* Adjust width for 2 columns */
+  margin: 1%;  /* Add margin for spacing between columns */
+}
+
+.games-section ul {
+  list-style-type: disc; /* Adds bullet points */
+  padding-left: 20px; /* Indent the list for better visibility */
+}
+
+.games-section li {
+  margin-bottom: 5px; /* Adds some space between each list item */
 }
 
 

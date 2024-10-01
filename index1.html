@@ -165,7 +165,7 @@
         <i class="fa-solid fa-ring fa-shake fa-4x" style="color:#16253b"></i>
         <div class="cursor-shadow"></div> <!-- Custom cursor shadow -->
       </div>
-      <p  class="section-heading1" style="color:#16253b; margin-right: 10px;">each ring has a letter on it</p>
+      <p  class="section-heading1" style="color:#16253b; margin-right: 10px;">click on each ring to reveal a heartfelt love letter</p>
     </div>
     
 
@@ -276,17 +276,15 @@
         <img id="changingImage4" src="https://garden.sssolfege.com/img/ring/iconring_16_01.png" alt="Memory 17" onclick="showModalVideo()" >
         <div class="caption" style="color:#3B8EDB">
           <img class="caption-image" src="https://garden.sssolfege.com/img/ring/textring_16.png" alt="LAVENDER"  />
-        </div>
-       
-      </div>  
+        </div>  
+      </div> 
 
     </div>
-  </div>
   </section>
               <!-- Button to show the modal with video -->
    
 <section>
- <!--  
+
 <div id="videoModal" class="video-modal">
   <div class="video-modal-content">
       <span class="close" onclick="closeModal('videoModal')">&times;</span> 
@@ -296,12 +294,17 @@
       </video>
   </div>
 </div>
--->
+
 <!-- Picture Modal (hidden initially) -->
 <div id="pictureModal" class="picture-modal">
   <div class="picture-modal-content">
       <span class="close" onclick="closeModal('pictureModal')">&times;</span> <!-- X button -->
-      <img src="Letter/16Helios.png" alt="Popup Picture">
+      <img id="firstImage" src="Letter/16Helios.jpg" alt="Popup Picture 1">
+      <img id="secondImage" src="Letter/16Helios1.jpg" alt="Popup Picture 2" style="display: none;"> <!-- Second image hidden initially -->
+      
+      <!-- Navigation Buttons -->
+      <button onclick="showPreviousImage()">Previous</button>
+      <button onclick="showNextImage()">Next</button>
   </div>
 </div>
 </section>
@@ -927,26 +930,51 @@ Lastly, remember that good things take time. You know what I mean. Haha. Love yo
 
 
     <section class="games-section" id="games">
-      <a href="https://forms.gle/aYkKAiGQyG8dAaMi8" target="_blank" style="display: block; text-decoration: none; color: inherit;">
-          <h2 style="font-family: 'Dancing Script', cursive; color:#e6c57e;">Games</h2>
+      <h2 class="section-title" style="font-family: 'Dancing Script', cursive; color:#e6c57e;">Games</h2>
+      <div class="game-column">
+        <a href="https://forms.gle/aYkKAiGQyG8dAaMi8" target="_blank" style="text-decoration: none; color: inherit;">
           <p>Click here to participate Who knows the BEBUs best!</p>
-      </a>
+        </a>
+        <ul>
+          <li>Each participant answers a series of fill-in-the-blank questions about the couple.</li>
+          <li>The participant with the most correct answers wins.</li>
+          <li>If there's a tie, a tiebreaker question can be used.</li>
+          <li>Prize: Mascot/Unicorn</li>
+        </ul>
+      </div>
       
-      <a href="https://forms.gle/g5cHeDWyFc2c2ENAA" target="_blank" style="display: block; text-decoration: none; color: inherit;">
-        <p>Click here to participate She said, He said</p> 
-     </a>
-  </section>
+      <div class="game-column">
+        <a href="https://forms.gle/g5cHeDWyFc2c2ENAA" target="_blank" style="text-decoration: none; color: inherit;">
+          <p>Click here to participate She said, He said</p>
+        </a>
+        <ul>
+          <li>Participants check the box next to who they think made each statement.</li>
+          <li>The participant with the most correct guesses wins.</li>
+          <li>If there's a tie, a tiebreaker question can be used.</li>
+          <li>Prize: Mascot/Unicorn</li>
+        </ul>
+      </div>
+    </section>
 
 
 
   
-  <audio id="bg-music" loop preload="auto">
+  <audio id="firstPictureMusic" loop preload="auto">
+    <source src="kisstherain.mp3" type="audio/mpeg"> <!-- Add MP3 as fallback -->
+    <source src="kisstherain.ogg" type="audio/ogg">
+    <source src="kisstherain.webm" type="audio/webm">
+    Your browser does not support the audio element.
+  </audio>
+
+  <audio id="secondPictureMusic" loop preload="auto">
+    <source src="lemonade.mp3" type="audio/mpeg"> <!-- Add MP3 as fallback -->
     <source src="lemonade.ogg" type="audio/ogg">
     <source src="lemonade.webm" type="audio/webm">
     Your browser does not support the audio element.
   </audio>
 
-  <audio id="another-music" preload="auto">
+  <audio id="bg-music" loop preload="auto">
+    <source src="riverflows.mp3" type="audio/mpeg"> <!-- Add MP3 as fallback -->
     <source src="riverflows.ogg" type="audio/ogg">
     <source src="riverflows.webm" type="audio/webm">
     Your browser does not support the audio element.
@@ -966,38 +994,50 @@ Lastly, remember that good things take time. You know what I mean. Haha. Love yo
   </footer>
 
 
- <script src="https://cdn.jsdelivr.net/npm/ogv@1.7.10/ogv.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ogv@1.7.10/ogv.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/ogv@1.7.10/ogv-worker-audio.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/ogv@1.7.10/ogv-worker-video.js"></script>
 
 <script>
+
+let currentImageIndex = 0; // Start with the first image
+let firstPictureMusic = document.getElementById('firstPictureMusic');
+let secondPictureMusic = document.getElementById('secondPictureMusic');
+
+function showPicture() {
+  const pictureModal = document.getElementById('pictureModal');
+  pictureModal.style.display = 'flex'; // Show the picture modal
+  updateImageVisibility();
+}
   
   function openModal(imageSrc) {
     const modal = document.getElementById('myModal');
     const modalImage = document.getElementById('modalImage');
     modalImage.src = imageSrc;
     modal.style.display = 'block'; // Show the modal
-    currentIndex = images.indexOf(imageSrc); // Set the index of the current image
+
 }
 
 // Close modal (generic for all modals)
 function closeModal(modalId = 'myModal') {
-    const modal = document.getElementById(modalId);
-    modal.style.display = 'none'; // Hide the modal
+  const modal = document.getElementById(modalId);
+  modal.style.display = 'none'; // Hide the modal
 
-    // Check if closing the video modal
-    if (modalId === 'videoModal') {
-        anotherMusic.pause(); // Stop another music
-        anotherMusic.currentTime = 0; // Reset playback time
-        bgMusic.play(); // Resume background music
-    }
+  // Check if closing the video modal
+  if (modalId === 'videoModal') {
+    anotherMusic.pause(); // Stop another music
+    anotherMusic.currentTime = 0; // Reset playback time
+    bgMusic.play(); // Resume background music
+  }
 
-    // Check if closing the picture modal
-    if (modalId === 'pictureModal') {
-        anotherMusic.pause(); // Stop another music
-        anotherMusic.currentTime = 0; // Reset playback time
-        bgMusic.play(); // Resume background music
-    }
+  // Check if closing the picture modal
+  if (modalId === 'pictureModal') {
+    anotherMusic.pause(); // Stop another music
+    anotherMusic.currentTime = 0; // Reset playback time
+    bgMusic.play(); // Resume background music
+    firstPictureMusic.pause(); // Stop first picture music
+    secondPictureMusic.pause(); // Stop second picture music
+  }
 }
 
 
@@ -1145,6 +1185,25 @@ function createSparkleAnother4(e) {
     }, 1000); // Match the animation duration (1s)
 }
 
+function createSparkleAnother5(e) {
+    console.log('Creating sparkles in wp-section'); // Add this for debugging
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('sparkle-another5'); // Correct class name
+
+    // Append sparkles to the new section
+    anotherSection5.appendChild(sparkle);
+
+    // Calculate the position relative to the wp-section
+    const rect = anotherSection5.getBoundingClientRect();
+    sparkle.style.left = `${e.clientX - rect.left}px`;
+    sparkle.style.top = `${e.clientY - rect.top}px`;
+
+    // Remove sparkle after animation completes
+    setTimeout(() => {
+        sparkle.remove();
+    }, 1000); // Match the animation duration (1s)
+}
+
 // Select the original section
 const lpSection = document.querySelector('.lp-section');
 
@@ -1181,18 +1240,18 @@ const anotherSection4 = document.querySelector('.rev-section'); // Corrected the
 // Add mousemove event listener to the new section
 anotherSection4.addEventListener('mousemove', createSparkleAnother4);
 
+// Correct the section selection to match the CSS class
+const anotherSection5 = document.querySelector('.games-section'); // Corrected the class name
+
+// Add mousemove event listener to the new section
+anotherSection5.addEventListener('mousemove', createSparkleAnother5);
+
 
 
 
 
 //-----------------------------------------------------------------------------------------------
 
-window.addEventListener('load', function() {
-    const audio = document.getElementById('background-music');
-    audio.play().catch(() => {
-        console.log("Autoplay prevented, trying to start playback on interaction.");
-    });
-});
 
 
 //-----------------------------------------------------------------------------------------------
@@ -1200,7 +1259,7 @@ window.addEventListener('load', function() {
 
    // Function to open Spotify when the page loads
 
-        let imageIndexes = {
+ let imageIndexes = {
     changingImage1: 0,
     changingImage2: 0,
     changingImage3: 0,
@@ -1272,11 +1331,38 @@ setInterval(changeImage, 100);
 
 //-----------------------------------------------------------------------------------------------
 
+function updateImageVisibility() {
+  const firstImage = document.getElementById('firstImage');
+  const secondImage = document.getElementById('secondImage');
+  
+  if (currentImageIndex === 0) {
+    firstImage.style.display = 'block';
+    secondImage.style.display = 'none';
+    firstPictureMusic.play(); // Play first picture music
+    secondPictureMusic.pause(); // Stop second picture music
+  } else {
+    firstImage.style.display = 'none';
+    secondImage.style.display = 'block';
+    secondPictureMusic.play(); // Play second picture music
+    firstPictureMusic.pause(); // Stop first picture music
+  }
+}
+
+function showNextImage() {
+  currentImageIndex = (currentImageIndex + 1) % 2; // Toggle between 0 and 1
+  updateImageVisibility();
+}
+
+function showPreviousImage() {
+  currentImageIndex = (currentImageIndex - 1 + 2) % 2; // Toggle between 0 and 1
+  updateImageVisibility();
+}
+
 
 let heartContainer = document.getElementById('heart-container');
 let welcomeMessage = document.getElementById('welcome-message');
 let bgMusic = document.getElementById('bg-music');
-let anotherMusic = document.getElementById('another-music');
+let anotherMusic = document.getElementById('firstPictureMusic');
 
 function showModalVideo() {
     const videoModal = document.getElementById('videoModal');
@@ -1305,10 +1391,7 @@ function showModalVideo() {
 }
 
 // Function to show the picture modal after the video ends
-function showPicture() {
-    const pictureModal = document.getElementById('pictureModal');
-    pictureModal.style.display = 'flex'; // Show the picture modal
-}
+
 
 //-----------------------------------------------------------------------------------------------
 
@@ -1330,37 +1413,30 @@ window.onclick = function(event) {
     }
   });
 
-  document.addEventListener('keydown', function(event) {
-        if (document.getElementById('myModal').style.display === 'block') { // Check if modal is open
-            if (event.key === 'ArrowRight') {
-                navigateImage(1); // Next image
-            } else if (event.key === 'ArrowLeft') {
-                navigateImage(-1); // Previous image
-            }
-        }
-    });
-
-
-
     //-----------------------------------------------------------------------------------------------  
 
 
 
     function canPlayOggOrWebM() {
-        const audio = document.createElement('audio');
-        return !!(audio.canPlayType && (audio.canPlayType('audio/ogg') || audio.canPlayType('audio/webm')));
-    }
+    const audio = document.createElement('audio');
+    return !!(audio.canPlayType && (audio.canPlayType('audio/ogg') || audio.canPlayType('audio/webm')));
+}
 
-    function playWithFallback(audioElement) {
-        if (!canPlayOggOrWebM()) {
-            const ogvPlayer = new OGVPlayer();
-            ogvPlayer.src = audioElement.querySelector('source').src;
-            audioElement.parentNode.replaceChild(ogvPlayer, audioElement);
-            ogvPlayer.play();
-        } else {
-            audioElement.play();
-        }
+function playWithFallback(audioElement) {
+    if (!canPlayOggOrWebM()) {
+        const ogvPlayer = new OGVPlayer();
+        ogvPlayer.src = audioElement.querySelector('source').src;
+        audioElement.parentNode.replaceChild(ogvPlayer, audioElement);
+        ogvPlayer.play();
+    } else {
+        audioElement.play();
     }
+}
+
+// Example of how to trigger the audio play
+document.getElementById('bg-music').addEventListener('canplay', function() {
+    playWithFallback(this);
+});
 
     heartContainer.addEventListener('click', function () {
     heartContainer.style.opacity = '0';
