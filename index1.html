@@ -294,7 +294,8 @@
         </div>  
       </div> 
 
-      <a href="https://eunandmaks.netlify.app/index.html" class="album-item">
+      <div class="album-item" onclick="goToPage('eunandmaks.netlify.app/index.html')">
+        
         <img id="changingImage5" src="https://garden.sssolfege.com/img/ring/iconring_17_01.png" alt="Memory 18">
         <div class="caption" style="color:#3B8EDB">
           <img class="caption-image" src="https://garden.sssolfege.com/img/ring/textring_17.png" alt="LAVENDER" />
@@ -1511,7 +1512,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
+function goToPage(url) {
+    window.location.href = url; // Redirect to the specified URL
+}
 </script>
 
 </body>
