@@ -1303,7 +1303,7 @@ body {
       </div>
     </div>
 
-    <audio id="background-music" src="wiwym.mp3" preload="autoplay loop"></audio>
+    <audio id="backgroundMusic" src="wiwym.mp3" autoplay loop></audio>
 
     <script>
 
@@ -1317,17 +1317,13 @@ onload = () => {
 
   };
 
-  window.addEventListener("load", function() {
-        const music = document.getElementById('background-music');
-        
-        // Set the starting time to 2 minutes and 51 seconds (171 seconds)
-        music.currentTime = 171;
-
-        // Attempt to play the audio
-        music.play().catch(error => {
-            console.log("Autoplay was prevented due to browser restrictions. User interaction is required.");
+    // Function to play music when the page is loaded
+    window.onload = function() {
+        const audio = document.getElementById('backgroundMusic');
+        audio.play().catch(error => {
+            console.error('Audio playback failed:', error);
         });
-    });
+    };
 
 
   
