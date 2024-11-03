@@ -4,6 +4,16 @@ body{
   
 }
 
+#contentArea {
+  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: #fff;
+  margin-top: 20px;
+  width: 80%; /* Width can be adjusted as needed */
+  max-height: 500px; /* Max height for overflow */
+  overflow-y: auto; /* Scroll if content exceeds max height */
+}
+
 
 
 h1, h2, h3, h4, h5, h6{

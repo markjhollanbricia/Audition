@@ -279,6 +279,15 @@
         </div>  
       </div> 
 
+      <div class="album-item" onclick="openHtml('index.html')">
+        <img id="changingImage5" src="https://garden.sssolfege.com/img/ring/iconring_17_01.png" alt="Memory 18">
+        <div class="caption" style="color:#3B8EDB">
+          <img class="caption-image" src="https://garden.sssolfege.com/img/ring/textring_17.png" alt="LAVENDER" />
+      </div>
+      </div> 
+
+      <div id="contentArea"></div>
+
     </div>
   </section>
               <!-- Button to show the modal with video -->
@@ -1015,8 +1024,11 @@ function showPicture() {
     const modalImage = document.getElementById('modalImage');
     modalImage.src = imageSrc;
     modal.style.display = 'block'; // Show the modal
-
 }
+
+
+
+        
 
 // Close modal (generic for all modals)
 function closeModal(modalId = 'myModal') {
@@ -1450,6 +1462,24 @@ document.getElementById('bg-music').addEventListener('canplay', function() {
         bgMusic.play();
     }, 1000);
 });
+
+
+function openHtml(file) {
+    const contentArea = document.getElementById('contentArea');
+    
+    fetch(file) // Fetch the HTML file
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text(); // Get the response text
+        })
+        .then(data => {
+            contentArea.innerHTML = data; // Load HTML into the content area
+            contentArea.style.display = 'block'; // Show the content area
+        })
+        .catch(error => console.error('Error loading HTML:', error));
+}
 
 
 
