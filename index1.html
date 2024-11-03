@@ -19,6 +19,21 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
   
   <!-- FAVICON ICO -->
+
+  <style>
+
+#contentArea {
+  display: none; /* Initially hidden */
+  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: #fff;
+  margin-top: 20px;
+  width: 80%;
+  max-height: 500px; 
+  overflow-y: auto; 
+}
+
+  </style>
 </head>
 
 <body>
@@ -279,7 +294,7 @@
         </div>  
       </div> 
 
-      <div class="album-item" onclick="openHtml('Audition/index.html')">
+      <div class="album-item" onclick="openHtml('index.html')">
         <img id="changingImage5" src="https://garden.sssolfege.com/img/ring/iconring_17_01.png" alt="Memory 18">
         <div class="caption" style="color:#3B8EDB">
           <img class="caption-image" src="https://garden.sssolfege.com/img/ring/textring_17.png" alt="LAVENDER" />
@@ -1462,6 +1477,9 @@ document.getElementById('bg-music').addEventListener('canplay', function() {
 
 
 function openHtml(file) {
+    // Hide main content
+    document.getElementById('mainContent').style.display = 'none';
+    
     const contentArea = document.getElementById('contentArea');
     
     fetch(file) // Fetch the HTML file
