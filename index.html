@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <!--  
@@ -35,6 +36,33 @@ body {
   overflow: hidden;
   perspective: 1000px;
 }
+
+
+
+  /* Centered and justified text container */
+         /* Floating animation for text */
+         @keyframes floating {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Text container */
+        .centered-text {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            line-height: 1.6;
+            max-width: 80%; /* Adjust for readability */
+            padding: 20px;
+            background-color: rgba(25, 220, 255, 0.6); /* Semi-transparent background */
+            border-radius: 8px;
+            display: none; /* Initially hidden */
+            animation: floating 3s ease-in-out infinite; /* Floating effect */
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
 
 .night {
   position: fixed;
@@ -1004,7 +1032,12 @@ body {
 
 
 
-<body class="not-loaded">
+<body class ="not-loaded">
+
+
+
+  
+
     <div class="night"></div>
     <div class="flowers">
       <div class="flower flower--1">
@@ -1301,34 +1334,50 @@ body {
           <div class="leaf leaf--3"></div>
         </div>
       </div>
+
     </div>
 
-    <audio id="backgroundMusic" src="wiwym.mp3" autoplay loop></audio>
+                <!-- Text that will appear after music ends -->
+                <div class="centered-text" id="centeredText" style="font-family: 'Raleway', sans-serif;">
+                  Hi love. Ginagawa ko tong letter na to ngayong 10/17/2024. Wala lang wala akong magawa e. kesa namimiss kita. Alam ko din naman na darating padin tayo sa point na mag cucupid at need ko magletter para kahit papano mapasaya ka. Yun lang naman yung mga gusto mo eh yung mapasaya kalang kahit sa maliliit na bagay. Happy Cupid! HAHAHAHAHAHAHAAHA diko inexpect na ganito. na aabot din ako sa gantong ring sa audi. Dati tamang cg cg lang. Ngayon kahit papano may pinanghahawakan nako sa audi. Alam mo. Gustong gusto ko talaga maranasan na ikaw yung kasa kasama ko :( parang ang saya lang. Gusto ko bigay yung mga kasiyahan mo. Di man lahat pero alam kong ikasasaya mo. Gusto kita alagaan. Gusto ko andyan lang ako sa tuwing nahihirapan ka. Gusto kitang yakapin sa mga pagkakataon na parang nafefeel mo na ikaw nalang magisa. Gusto kong maging sayo. Swerte na ng taong nagmamahal sayo ngayon. Napakaswerte nya na na nasa kanya ka. Sana ayusin nya para sainyo. Kasi yung tulad mo yung gusto ko at nangangarap lang din ako sa tulad mo. Kung magkakaroon lang din ako ng ganyan mgiging grateful nako sa araw araw. hahahahaha Yun lang :( Thankyouuu sa pagiging maintindihin sa lahat ng bagay. Lalo na sa mga kadeluluhan ko. Maraming salamat sa pagiging mabuting partner mo sakin. Sana andyan kalang lagi for me. Gusto ko andto lang din ako sayo.  'Sana', 'Hoping' . Anw, HAHAHAHAHAHA Happy Cupid!! road to max ring! Lovelots(iloveyou and imissyou). 
+              </div>
+
+
+
+    <audio id="backgroundMusic" src="wiwym.mp3" auto></audio>
 
     <script>
 
-      
-onload = () => {
-    const c = setTimeout(() => {
+const audio = document.getElementById('backgroundMusic');
+        const text = document.getElementById('centeredText');
+        const background = document.getElementById('silhouetteBackground');
+
+        // Set the audio to start at 171 seconds (2 minutes and 51 seconds)
+        audio.currentTime = 171;
+
+        // Play audio after user interaction to comply with autoplay policy
+        window.addEventListener('click', function() {
+            audio.play().catch(error => {
+                console.error('Audio playback failed:', error);
+            });
+            window.removeEventListener('click', arguments.callee);
+            const c = setTimeout(() => {
       document.body.classList.remove("not-loaded");
       clearTimeout(c);
     }, 1000);
-    
-    // Function to play music when the page is loaded
-    window.onload = function() {
-        const audio = document.getElementById('backgroundMusic');
-        audio.play().catch(error => {
-            console.error('Audio playback failed:', error);
         });
-    };
 
-  };
+ // Show floating text after the music ends
+ audio.addEventListener('ended', function() {
+            text.style.display = 'block';
+            text.style.opacity = '1'; // Fade in the text
+        });
 
 
 
 
-  
-  
     </script>
   </body>
+
+
 </html>
