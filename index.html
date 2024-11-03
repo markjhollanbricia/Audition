@@ -1344,8 +1344,10 @@ body {
 
 
 
-    <audio id="backgroundMusic" src="wiwym.mp3" auto></audio>
-
+    <audio id="backgroundMusic" auto></audio>
+    <source src="wiwym.mp3" type="audio/mpeg"> <!-- Add MP3 as fallback -->
+    <source src="kisstherain.ogg" type="audio/ogg">
+    <source src="kisstherain.webm" type="audio/webm">
     <script>
 
 const audio = document.getElementById('backgroundMusic');
