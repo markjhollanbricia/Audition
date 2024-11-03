@@ -1476,25 +1476,32 @@ document.getElementById('bg-music').addEventListener('canplay', function() {
 });
 
 
-function openHtml(file) {
-    // Hide main content
-    document.getElementById('mainContent').style.display = 'none';
-    
-    const contentArea = document.getElementById('contentArea');
-    
-    fetch(file) // Fetch the HTML file
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.text(); // Get the response text
-        })
-        .then(data => {
-            contentArea.innerHTML = data; // Load HTML into the content area
-            contentArea.style.display = 'block'; // Show the content area
-        })
-        .catch(error => console.error('Error loading HTML:', error));
-}
+document.addEventListener('DOMContentLoaded', function() {
+    window.openHtml = function(file) {
+        // Hide main content
+        const mainContent = document.getElementById('mainContent');
+        if (mainContent) {
+            mainContent.style.display = 'none'; // Hide main content
+        } else {
+            console.error('Element with ID "mainContent" not found.');
+        }
+
+        const contentArea = document.getElementById('contentArea');
+        
+        fetch(file) // Fetch the HTML file
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text(); // Get the response text
+            })
+            .then(data => {
+                contentArea.innerHTML = data; // Load HTML into the content area
+                contentArea.style.display = 'block'; // Show the content area
+            })
+            .catch(error => console.error('Error loading HTML:', error));
+    };
+});
 
 
 
