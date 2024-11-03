@@ -1352,6 +1352,7 @@ body {
   </audio>
     <script>
 
+
 const audio = document.getElementById('backgroundMusic');
         const text = document.getElementById('centeredText');
         const background = document.getElementById('silhouetteBackground');
@@ -1370,6 +1371,10 @@ const audio = document.getElementById('backgroundMusic');
       clearTimeout(c);
     }, 1000);
         });
+
+        document.getElementById('backgroundMusic').addEventListener('canplay', function() {
+    playWithFallback(this);
+});
 
  // Show floating text after the music ends
  audio.addEventListener('ended', function() {
